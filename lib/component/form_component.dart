@@ -17,11 +17,11 @@ class FormComponent {
             style: FontStyleApp.contentStyle(),
             decoration: InputDecoration(
               hintText: "Masukan $fieldName",
-              fillColor: ThemeApp.defaultcolor,
               filled: true,
+              fillColor: ThemeApp.white,
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide.none),
+                  borderSide: BorderSide(color: ThemeApp.defaultcolor)),
             ),
             onChanged: (value) {
               data[mapKey] = value;

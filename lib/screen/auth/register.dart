@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jurnalist_app/component/appbar_component.dart';
+import 'package:jurnalist_app/component/dashboard/appbar_component.dart';
 import 'package:jurnalist_app/component/form_component.dart';
 import 'package:jurnalist_app/style/button_style.dart';
 import 'package:jurnalist_app/style/font_style.dart';
@@ -85,7 +85,12 @@ class RegisterScreenState extends State<RegisterScreen> {
       width: double.infinity,
       margin: EdgeInsets.all(10),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            data = component.data;
+          });
+          print(data);
+        },
         child: Text("REGISTRASI"),
         style: ButtonStyles.buttonStyleData(
             ThemeApp.primary, ThemeApp.white, ThemeApp.primary),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jurnalist_app/component/form_component.dart';
 import 'package:jurnalist_app/screen/auth/register.dart';
+import 'package:jurnalist_app/screen/dashboard/dashboard.dart';
 import 'package:jurnalist_app/style/button_style.dart';
 import 'package:jurnalist_app/style/font_style.dart';
 import 'package:jurnalist_app/style/theme.dart';
@@ -77,8 +78,7 @@ class AuthScreenState extends State<AuthScreen> {
           ),
         ),
         padding: EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             _welcomeText(),
             Container(
@@ -118,7 +118,12 @@ class AuthScreenState extends State<AuthScreen> {
         child: Text("LOGIN"),
         style: ButtonStyles.buttonStyleData(
             ThemeApp.primary, Colors.white, ThemeApp.primary),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => DashboardScreen()),
+              (route) => false);
+        },
       ),
     );
   }

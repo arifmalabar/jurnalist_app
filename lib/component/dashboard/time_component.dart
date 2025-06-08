@@ -1,43 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:jurnalist_app/component/dashboard/time_component.dart';
-import 'package:jurnalist_app/component/main_appbar.dart';
-import 'package:jurnalist_app/style/font_style.dart';
-import 'package:jurnalist_app/style/theme.dart';
 
-class DashboardScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return DashboardScreenState();
-  }
-}
+import '../../style/font_style.dart';
+import '../../style/theme.dart';
 
-class DashboardScreenState extends State<DashboardScreen> {
-  late MainAppBar appbar;
-  late TimeComponent timeComponent;
-  DashboardScreenState() {
-    this.appbar = new MainAppBar();
-    this.timeComponent = new TimeComponent();
-  }
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80),
-        child: Container(
-          margin: EdgeInsets.only(top: 10, right: 15),
-          child: this.appbar.getAppBar(),
-        ),
-      ),
-      body: Stack(
-        children: [
-          this.timeComponent.timeContainer(),
-          todayAgend(),
-        ],
-      ),
-      backgroundColor: ThemeApp.maintheme,
-    );
-  }
-
+class TimeComponent {
   Widget timeContainer() {
     return Positioned(
       top: 5,
@@ -117,36 +83,6 @@ class DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget todayAgend() {
-    return Positioned(
-      top: MediaQuery.of(context).size.height * 0.23,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: Container(
-        decoration: BoxDecoration(
-          color: ThemeApp.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(25),
-            topRight: Radius.circular(25),
-          ),
-        ),
-        child: Container(
-          margin: EdgeInsets.only(left: 10, right: 10, top: 5),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "Agenda",
-                style: FontStyleApp.titleStyle(),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget activedDayItem() {
     return Container(
       margin: EdgeInsets.only(left: 10, right: 10),
@@ -180,14 +116,6 @@ class DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  TextStyle fontItemStyle() {
-    return TextStyle(
-      color: Colors.white,
-      fontWeight: FontStyleApp.title_weigth,
-      fontSize: FontStyleApp.title,
-    );
-  }
-
   TextStyle timeStyle() {
     return TextStyle(
       color: ThemeApp.white,
@@ -195,7 +123,11 @@ class DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  AppBar appBar() {
-    return AppBar();
+  TextStyle fontItemStyle() {
+    return TextStyle(
+      color: Colors.white,
+      fontWeight: FontStyleApp.title_weigth,
+      fontSize: FontStyleApp.title,
+    );
   }
 }

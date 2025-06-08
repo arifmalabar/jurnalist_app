@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../style/theme.dart';
+import '../../style/theme.dart';
 
 class AppBarComponent {
   static AppBar appBar(String title) {
