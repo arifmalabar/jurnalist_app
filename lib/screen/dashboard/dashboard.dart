@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jurnalist_app/component/dashboard/time_component.dart';
+import 'package:jurnalist_app/component/dashboard/today_agend.dart';
 import 'package:jurnalist_app/component/main_appbar.dart';
 import 'package:jurnalist_app/style/font_style.dart';
 import 'package:jurnalist_app/style/theme.dart';
@@ -14,9 +15,11 @@ class DashboardScreen extends StatefulWidget {
 class DashboardScreenState extends State<DashboardScreen> {
   late MainAppBar appbar;
   late TimeComponent timeComponent;
+  late TodayAgend todayAgend;
   DashboardScreenState() {
     this.appbar = new MainAppBar();
     this.timeComponent = new TimeComponent();
+    this.todayAgend = new TodayAgend();
   }
   @override
   Widget build(BuildContext context) {
@@ -29,10 +32,7 @@ class DashboardScreenState extends State<DashboardScreen> {
         ),
       ),
       body: Stack(
-        children: [
-          this.timeComponent.timeContainer(),
-          todayAgend(),
-        ],
+        children: [this.timeComponent.timeContainer(), this.todayAgend],
       ),
       backgroundColor: ThemeApp.maintheme,
     );
@@ -113,36 +113,6 @@ class DashboardScreenState extends State<DashboardScreen> {
             style: fontItemStyle(),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget todayAgend() {
-    return Positioned(
-      top: MediaQuery.of(context).size.height * 0.23,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: Container(
-        decoration: BoxDecoration(
-          color: ThemeApp.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(25),
-            topRight: Radius.circular(25),
-          ),
-        ),
-        child: Container(
-          margin: EdgeInsets.only(left: 10, right: 10, top: 5),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "Agenda",
-                style: FontStyleApp.titleStyle(),
-              )
-            ],
-          ),
-        ),
       ),
     );
   }
