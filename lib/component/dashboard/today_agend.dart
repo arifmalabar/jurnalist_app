@@ -11,6 +11,10 @@ class TodayAgend extends StatefulWidget {
 }
 
 class TodayAgendScreen extends State<TodayAgend> {
+  List<Map<String, dynamic>> data_agenda = [
+    {"id": "1", "time": "10:00", "agenda": "Ulangan OOP"},
+    {"id": "2", "time": "12:00", "agenda": "Semhas"}
+  ];
   @override
   Widget build(BuildContext context) {
     return this.todayAgend();
@@ -32,16 +36,11 @@ class TodayAgendScreen extends State<TodayAgend> {
         ),
         child: Container(
           margin: EdgeInsets.only(left: 10, right: 10, top: 5),
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              _getTitle(),
-              _itemAgenda(),
-              _itemAgenda(),
-              _itemAgenda(),
-              _itemAgenda(),
-              _itemAgenda()
-            ],
+          child: ListView.builder(
+            itemCount: data_agenda.length,
+            itemBuilder: (context, index) {
+              return _itemAgenda(data_agenda[index]);
+            },
           ),
         ),
       ),
@@ -59,19 +58,7 @@ class TodayAgendScreen extends State<TodayAgend> {
     );
   }
 
-  Widget _listAgenda() {
-    return ListView(
-      children: [
-        _itemAgenda(),
-        _itemAgenda(),
-        _itemAgenda(),
-        _itemAgenda(),
-        _itemAgenda()
-      ],
-    );
-  }
-
-  Widget _itemAgenda() {
+  Widget _itemAgenda(Map<String, dynamic> item) {
     return SizedBox(
       width: double.infinity, // Match parent
       child: Card(
@@ -81,10 +68,11 @@ class TodayAgendScreen extends State<TodayAgend> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _time(), // Misal widget jam
+              _time(item["time"]), // Misal widget jam
               SizedBox(width: 20),
               Expanded(
-                  child: _content()), // ✅ Supaya _content fleksibel lebarnya
+                child: _content(item["agenda"]),
+              ),
             ],
           ),
         ),
@@ -92,7 +80,7 @@ class TodayAgendScreen extends State<TodayAgend> {
     );
   }
 
-  Widget _time() {
+  Widget _time(String time) {
     return Container(
       height: 80,
       width: 80,
@@ -102,19 +90,19 @@ class TodayAgendScreen extends State<TodayAgend> {
         border: Border.all(color: ThemeApp.primary, width: 4),
       ),
       child: Text(
-        "10.10",
+        time,
         style: FontStyleApp.titleStyle(),
       ),
     );
   }
 
-  Widget _content() {
+  Widget _content(String agenda) {
     return SizedBox(
       height: 100,
       width: 150,
       child: ListTile(
         title: Text(
-          "Agenda1",
+          agenda,
           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
         ),
         subtitle: LinearProgressIndicator(

@@ -32,7 +32,7 @@ class DashboardScreenState extends State<DashboardScreen> {
         ),
       ),
       body: Stack(
-        children: [this.timeComponent.timeContainer(), this.todayAgend],
+        children: [this.timeComponent, this.todayAgend],
       ),
       backgroundColor: ThemeApp.maintheme,
     );
