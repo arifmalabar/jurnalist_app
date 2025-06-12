@@ -12,8 +12,8 @@ class TodayAgend extends StatefulWidget {
 
 class TodayAgendScreen extends State<TodayAgend> {
   List<Map<String, dynamic>> data_agenda = [
-    {"id": "1", "time": "10:00", "agenda": "Ulangan OOP"},
-    {"id": "2", "time": "12:00", "agenda": "Semhas"}
+    {"id": "1", "time": "10:00", "agenda": "Iterasi 1"},
+    {"id": "2", "time": "12:00", "agenda": "Iterasi 2"}
   ];
   @override
   Widget build(BuildContext context) {

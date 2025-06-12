@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jurnalist_app/component/form_component.dart';
+import 'package:jurnalist_app/main.dart';
 import 'package:jurnalist_app/screen/auth/register.dart';
 import 'package:jurnalist_app/screen/dashboard/dashboard.dart';
 import 'package:jurnalist_app/style/button_style.dart';
@@ -121,7 +122,7 @@ class AuthScreenState extends State<AuthScreen> {
         onPressed: () {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => DashboardScreen()),
+              MaterialPageRoute(builder: (context) => MyApp(true)),
               (route) => false);
         },
       ),

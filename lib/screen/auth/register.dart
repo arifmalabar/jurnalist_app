@@ -14,6 +14,7 @@ class RegisterScreen extends StatefulWidget {
 
 class RegisterScreenState extends State<RegisterScreen> {
   Map<String, dynamic> data = {"nama": "", "notelp": "", "nama_instansi": ""};
+  bool isSetuju = false;
   late FormComponent component;
   RegisterScreenState() {
     this.component = new FormComponent(data);
@@ -103,8 +104,12 @@ class RegisterScreenState extends State<RegisterScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Checkbox(
-          value: false,
-          onChanged: (value) {},
+          value: isSetuju,
+          onChanged: (value) {
+            setState(() {
+              isSetuju = value!;
+            });
+          },
         ),
         Text("Saya Menyetujui "),
         Text(

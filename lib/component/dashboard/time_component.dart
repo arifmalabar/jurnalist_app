@@ -13,6 +13,10 @@ class TimeComponent extends StatefulWidget {
 
 class TimeComponentState extends State<TimeComponent> {
   int selectedindex = 0;
+
+  int selectedMonth = 6; // Juni
+  int selectedYear = 2025;
+
   List<Map<String, dynamic>> generateDatesInMonth(int month, int year) {
     List<Map<String, dynamic>> dates = [];
 
@@ -47,24 +51,102 @@ class TimeComponentState extends State<TimeComponent> {
   }
 
   Widget timeWidget() {
+    List<String> months = [
+      "Januari",
+      "Februari",
+      "Maret",
+      "April",
+      "Mei",
+      "Juni",
+      "Juli",
+      "Agustus",
+      "September",
+      "Oktober",
+      "November",
+      "Desember"
+    ];
     return ListTile(
       leading: Text(
-        "Bulan",
+        "${months[selectedMonth - 1]}",
         style: timeStyle(),
       ),
       trailing: Container(
         margin: EdgeInsets.only(bottom: 5),
         child: Text(
-          "Tahun",
+          selectedYear.toString(),
           style: timeStyle(),
         ),
       ),
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          builder: (context) {
+            return Padding(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Pilih Bulan Dan Tahun',
+                    style: FontStyleApp.subTitleStyle(),
+                    textAlign: TextAlign.left,
+                  ),
+                  SizedBox(height: 10),
+                  listTime(),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text('PILIH BULAN & TAHUN'),
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Row listTime() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        DropdownButton<int>(
+          hint: Text("Bulan $selectedMonth"),
+          items: List.generate(12, (index) {
+            int bln = index + 1;
+            return DropdownMenuItem(
+              child: Text("Bulan $bln"),
+              value: bln,
+            );
+          }),
+          onChanged: (value) {
+            setState(() {
+              selectedMonth = value!;
+              Navigator.pop(context);
+            });
+          },
+        ),
+        Divider(),
+        DropdownButton(
+          items: List.generate(2, (index) {
+            return DropdownMenuItem(
+              child: Text("Tahun "),
+              value: index,
+            );
+          }),
+          onChanged: (value) {},
+        )
+      ],
     );
   }
 
   Widget showDay() {
-    final int selectedMonth = 6; // Juni
-    final int selectedYear = 2025;
     List<Map<String, dynamic>> dateList =
         generateDatesInMonth(selectedMonth, selectedYear);
     return SizedBox(
