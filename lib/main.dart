@@ -9,10 +9,14 @@ import 'package:jurnalist_app/screen/tambah_jurnal/tambah_jurnal.dart';
 import 'package:jurnalist_app/style/theme.dart';
 
 void main() async {
+  initLocale();
+  runApp(MyApp(false));
+}
+
+void initLocale() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting(
       'id_ID', null); // Inisialisasi locale Indonesia
-  runApp(MyApp(false));
 }
 
 class MyApp extends StatelessWidget {
