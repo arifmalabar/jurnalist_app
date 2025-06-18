@@ -20,8 +20,9 @@ class FormComponent {
               filled: true,
               fillColor: ThemeApp.white,
               border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: ThemeApp.defaultcolor)),
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(color: ThemeApp.defaultcolor),
+              ),
             ),
             onChanged: (value) {
               data[mapKey] = value;

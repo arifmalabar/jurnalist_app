@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jurnalist_app/component/dashboard/appbar_component.dart';
 import 'package:jurnalist_app/component/form_component.dart';
+import 'package:jurnalist_app/screen/auth/auth.dart';
 import 'package:jurnalist_app/style/button_style.dart';
 import 'package:jurnalist_app/style/font_style.dart';
 import 'package:jurnalist_app/style/theme.dart';
@@ -91,6 +92,13 @@ class RegisterScreenState extends State<RegisterScreen> {
             data = component.data;
           });
           print(data);
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AuthScreen(),
+            ),
+            (route) => false,
+          );
         },
         child: Text("REGISTRASI"),
         style: ButtonStyles.buttonStyleData(

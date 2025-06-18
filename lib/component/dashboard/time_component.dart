@@ -177,6 +177,7 @@ class TimeComponentState extends State<TimeComponent> {
             color: Colors.white,
             width: 2,
           ),
+          color: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.all(
             Radius.circular(15),
           ),
@@ -189,7 +190,9 @@ class TimeComponentState extends State<TimeComponent> {
               item["hari"],
               style: fontItemStyle(),
             ),
-            Divider(),
+            SizedBox(
+              height: 10,
+            ),
             Text(
               item["tgl"].toString(),
               style: fontItemStyle(),
@@ -228,7 +231,9 @@ class TimeComponentState extends State<TimeComponent> {
             item["hari"],
             style: fontItemStyle(),
           ),
-          Divider(),
+          SizedBox(
+            height: 10,
+          ),
           Text(
             item["tgl"].toString(),
             style: fontItemStyle(),
