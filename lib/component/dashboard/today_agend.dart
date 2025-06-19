@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jurnalist_app/screen/edit_jurnal/edit_jurnal.dart';
 
 import '../../style/font_style.dart';
 import '../../style/theme.dart';
@@ -61,21 +62,31 @@ class TodayAgendScreen extends State<TodayAgend> {
   Widget _itemAgenda(Map<String, dynamic> item) {
     return SizedBox(
       width: double.infinity, // Match parent
-      child: Card(
-        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _time(item["time"]), // Misal widget jam
-              SizedBox(width: 20),
-              Expanded(
-                child: _content(item["agenda"]),
-              ),
-            ],
+      child: InkWell(
+        child: Card(
+          margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _time(item["time"]), // Misal widget jam
+                SizedBox(width: 20),
+                Expanded(
+                  child: _content(item["agenda"]),
+                ),
+              ],
+            ),
           ),
         ),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EditJurnal("Edit"),
+            ),
+          );
+        },
       ),
     );
   }

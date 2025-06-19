@@ -59,7 +59,7 @@ class MainAppState extends State<MainApp> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => TambahJurnal(),
+              builder: (context) => TambahJurnal("Tambah"),
             ),
           );
         },
