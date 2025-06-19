@@ -28,6 +28,6 @@ class FontStyleApp {
   }
 
   static TextStyle? _getStyle(double size, FontWeight weight) {
-    return TextStyle(fontWeight: weight, fontSize: size, color: Colors.black);
+    return TextStyle(fontWeight: weight, fontSize: size);
   }
 }
