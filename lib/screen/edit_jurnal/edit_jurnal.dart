@@ -1,17 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:jurnalist_app/component/message_box.dart';
 import 'package:jurnalist_app/screen/tambah_jurnal/tambah_jurnal.dart';
 import 'package:jurnalist_app/style/button_style.dart';
 import 'package:jurnalist_app/style/theme.dart';
 
 class EditJurnal extends TambahJurnal {
-  EditJurnal(super.key);
+  late Map<String, dynamic> item_data;
+  EditJurnal(super.key, this.item_data);
   @override
   State<StatefulWidget> createState() {
-    return EditJurnalState();
+    return EditJurnalState(item_data);
   }
 }
 
 class EditJurnalState extends TambahJurnalState {
+  late Map<String, dynamic> item;
+  late MessageBox msg;
+
+  EditJurnalState(Map<String, dynamic> item) {
+    this.item = item;
+  }
+  void dropMsg() {
+    Navigator.pop(context, false);
+  }
+
+  List<Widget> getBtnMessage() {
+    return [
+      ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context, false);
+        },
+        child: Text("Batal"),
+        style: ButtonStyles.buttonStyleData(
+          ThemeApp.white,
+          ThemeApp.primary,
+          ThemeApp.primary,
+        ),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context, true);
+        },
+        child: Text("Hapus"),
+        style: ButtonStyles.buttonStyleData(
+          ThemeApp.danger,
+          ThemeApp.white,
+          ThemeApp.danger,
+        ),
+      )
+    ];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.initForm();
+    this.nama_kegiatan.text = item["agenda"];
+    this.kegiatan.text = "agenda";
+    msg = new MessageBox(context);
+  }
+
   @override
   BottomAppBar bottomAppBar() {
     return BottomAppBar(
@@ -36,7 +84,13 @@ class EditJurnalState extends TambahJurnalState {
             margin: EdgeInsets.only(left: 8, right: 8),
             child: ElevatedButton(
               child: Text("HAPUS DATA"),
-              onPressed: () {},
+              onPressed: () {
+                this.msg.showMessageBox(
+                      "Konfirmasi",
+                      "Konfirmasi Apakah anda ingin menghapus data",
+                      getBtnMessage(),
+                    );
+              },
               style: ButtonStyles.buttonStyleData(
                   ThemeApp.danger, ThemeApp.white, ThemeApp.danger),
             ),

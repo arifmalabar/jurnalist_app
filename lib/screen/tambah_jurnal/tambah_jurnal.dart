@@ -20,6 +20,8 @@ class TambahJurnal extends StatefulWidget {
 class TambahJurnalState extends State<TambahJurnal> {
   late MainAppBar appbar;
   late FormComponent formComponent;
+  late TextEditingController nama_kegiatan, tanggal_kegiatan, kegiatan;
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Map<String, String> data = {
     "nama_kegiatan": "",
     "tanggal_kegiatan": "",
@@ -27,10 +29,21 @@ class TambahJurnalState extends State<TambahJurnal> {
     "kegiatan": ""
   };
   TambahJurnalState() {
-    this.appbar = new MainAppBar();
+    this.appbar = new MainAppBar(this._scaffoldKey);
     this.formComponent = new FormComponent(data);
+    initForm();
   }
+  void initForm() {
+    nama_kegiatan = new TextEditingController();
+    tanggal_kegiatan = new TextEditingController();
+    kegiatan = new TextEditingController();
+  }
+
   void tambahData() {
+    data["nama_kegiatan"] = nama_kegiatan.text;
+    data["tanggal_kegiatan"] = tanggal_kegiatan.text;
+    data["kegiatan"] = kegiatan.text;
+    data["status"] = formComponent.data["status"];
     print(data);
     Navigator.pushAndRemoveUntil(
       context,
@@ -78,11 +91,13 @@ class TambahJurnalState extends State<TambahJurnal> {
           shrinkWrap: true,
           children: [
             SizedBox(height: 20),
-            this.formComponent.formField("nama_kegiatan", "Nama Kegiatan"),
+            this
+                .formComponent
+                .formFieldController("Nama Kegiatan", nama_kegiatan),
             SizedBox(height: 10),
             _verticalField(),
             SizedBox(height: 10),
-            this.formComponent.areaTextField("kegiatan", "Kegiatan", 5)
+            this.formComponent.areaTextFieldController("Kegiatan", 5, kegiatan)
           ],
         ),
       ),
@@ -97,10 +112,12 @@ class TambahJurnalState extends State<TambahJurnal> {
           Expanded(
             child: this
                 .formComponent
-                .formField("tanggal_kegiatan", "Tanggal Kegiatan"),
+                .datePickerField("Tanggal Kegiatan", tanggal_kegiatan, context),
           ),
           Expanded(
-            child: this.formComponent.formField("status", "Status Kegiatan"),
+            child: this
+                .formComponent
+                .formFieldComboBox("Status Kegiatan", "status"),
           ),
         ],
       ),

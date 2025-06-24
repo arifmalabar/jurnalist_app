@@ -83,7 +83,7 @@ class TodayAgendScreen extends State<TodayAgend> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => EditJurnal("Edit"),
+              builder: (context) => EditJurnal("Edit", item),
             ),
           );
         },
